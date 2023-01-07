@@ -1,4 +1,4 @@
-export class CarsCreateDto {
+export class CarDto {
   mark: string;
   model: string;
 }
