@@ -1,6 +1,7 @@
-import { Controller, Get, Param, ParseIntPipe, NotFoundException, Post, Put, Delete } from '@nestjs/common';
+import { Controller, Get, Param, ParseIntPipe, NotFoundException, Post, Put, Delete , Body} from '@nestjs/common';
 import { awaitPromiseOrObservable, Ctx, RequestContext } from '@vendure/core';
 import { CarsService } from './cars.service';
+import { CarsCreateDto } from './dto/cars-create-dto';
 
 @Controller('cars')
 export class CarsController {
@@ -23,10 +24,20 @@ export class CarsController {
   }
 
   @Post()
-  async createCar() {}
+  async createCar(@Body() carDto: CarsCreateDto) {
+    return this.carsService.createCar(carDto);
+  }
 
   @Put(':id')
-  async updateCar() {}
+  async updateCar(@Param('id', ParseIntPipe) id: number, @Body() carDto: CarsCreateDto) {
+    const car = await this.carsService.getCarsById(id);
+
+    if (!car) {
+      throw new NotFoundException(`car with id ${id} not found`)
+    }
+
+    return this.carsService.updateCar(id, carDto)
+  }
 
   @Delete(':id')
   async deleteCar(@Param('id', ParseIntPipe) id: number){
