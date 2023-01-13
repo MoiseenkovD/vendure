@@ -1,0 +1,16 @@
+<div align="center">
+
+	<h1>create car</h1>
+
+	<p *ngIf="isCreated == true">car successfully created</p>
+
+	<form [formGroup]="form">
+		<label>Enter the mark</label><br>
+		<input type="text" formControlName="mark"><br><br>
+		<label>Enter the model</label><br>
+		<input type="text" formControlName="model"><br>
+	</form>
+	<br>
+	<button (click)="createCar()">create car</button>
+
+</div>

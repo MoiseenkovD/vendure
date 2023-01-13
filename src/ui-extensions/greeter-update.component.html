@@ -1,0 +1,17 @@
+<div align="center">
+
+	<h1>update car</h1>
+
+	<p *ngIf="isUpdated == true">car successfully updated</p>
+
+	<form [formGroup]="form">
+		<label>ID: --- </label>
+		<label>Enter the new mark</label><br>
+		<input type="text" formControlName="mark" placeholder="?"><br><br>
+		<label>Enter the new model</label><br>
+		<input type="text" formControlName="model" placeholder="?"><br>
+	</form>
+	<br>
+	<button (click)="updateCar()">update car</button>
+
+</div>

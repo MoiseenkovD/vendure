@@ -1,0 +1,13 @@
+<h1>{{ greeting }}</h1>
+<p>{{ author }}</p>
+<button><a href="/admin/extensions/greet/create">create car</a></button>
+<div>
+	<ul>
+		<li *ngFor="let car of cars">
+			{{ car.mark }} - {{ car.model }} (id: {{ car.id }})
+			<button (click)="deleteCar(car.id)">delete</button>
+			<button><a href="/admin/extensions/greet/update/{{ car.id }}">edit</a></button>
+		</li>
+	</ul>
+</div>
+

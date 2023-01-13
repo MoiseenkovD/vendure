@@ -11,6 +11,7 @@ import 'dotenv/config';
 import path from 'path';
 import { ReviewsPlugin } from './plugins/reviews-plugin';
 import { CarsPlugin } from './plugins/cars/cars-plugin';
+import { compileUiExtensions } from '@vendure/ui-devkit/compiler';
 
 const IS_DEV = process.env.APP_ENV === 'dev';
 
@@ -89,6 +90,19 @@ export const config: VendureConfig = {
         AdminUiPlugin.init({
             route: 'admin',
             port: 3002,
+            app: compileUiExtensions({
+                devMode: true,
+                outputPath: path.join(__dirname, '../admin-ui'),
+                extensions: [{
+                    extensionPath: path.join(__dirname, 'ui-extensions'),
+                    ngModules: [{
+                        type: 'lazy',
+                        route: 'greet',
+                        ngModuleFileName: 'greeter.module.ts',
+                        ngModuleName: 'GreeterModule',
+                    }],
+                }],
+            }),
         }),
     ],
 };
